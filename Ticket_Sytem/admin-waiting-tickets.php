@@ -1,3 +1,4 @@
+<!-- HTML Document -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,7 @@
 </head>
 <?php 
 require_once('./support/int.php');
+// Check if the admin is not logged in, if not, redirect to the admin login page
 if(!isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] != true){
     header('Location: ./admin-login.php');
 }
@@ -25,6 +27,7 @@ $closed_count=0;
 $db=new DB();
 
 $latest=[];
+// Fetch the latest new tickets from the database
 $recodes=$db->conn->query("SELECT * FROM tickets WHERE status=1 ORDER BY 'date' DESC ");
 if($recodes->num_rows >0){
     while ($row = $recodes->fetch_assoc()) {
@@ -40,6 +43,7 @@ if($recodes->num_rows >0){
             
             <div class="card mb-3">
                 <div class="card-body">
+                    <!-- Navigation links -->
                     <div class="list-inline admn_ul">
                         <a href="./admin-dashboard.php" class="list-inline-item">Dashboard</a>
                         <a href="./admin-new-tickets.php" class="list-inline-item">New Tickets</a>
@@ -54,6 +58,7 @@ if($recodes->num_rows >0){
                 </div>
                 <div class="card-body">
                     <?php if(count($latest) > 0){?>
+                    <!-- Display the new tickets in a table -->
                     <table class="table table-striped table-inverse">
                         <thead class="thead-inverse">
                             <tr>

@@ -11,12 +11,14 @@
 <?php 
     $success=false;
     $error=false;
+    // Redirect to admin-dashboard if the 'id' parameter is not set in the URL
     if(!isset($_GET['id'])){
         header('Location: ./admin-dashboard');
     }
     require_once('./support/int.php');
     $db=new DB();
     $ticket='';
+    // Retrieve ticket details from the database based on the 'id' parameter
     $this_ticket_query=$db->conn->query("SELECT * FROM tickets WHERE id=".$_GET['id']);
     if($this_ticket_query->num_rows > 0){
         while ($row = $this_ticket_query->fetch_assoc()) {
@@ -28,6 +30,7 @@
     $ticket_id=$ticket['id'];
     $reps=[];
     if($ticket != ''){
+        // Retrieve ticket replies from the database based on the ticket_id
         $replies=$db->conn->query("SELECT * FROM ticket_reply WHERE ticket_id =$ticket_id");
         if($replies->num_rows > 0){
             while ($row = $replies->fetch_assoc()) {
@@ -35,11 +38,13 @@
             }
         }
     }
-    //Reply Send Method
+    // Reply Send Method
     if(isset($_POST['submit'])){
         $message=$_POST['message'];
+        // Insert the reply into the ticket_reply table
         if($db->conn->query("INSERT INTO ticket_reply (ticket_id,send_by,message) VALUES('$ticket_id','0','$message')")){
             $success="Reply has been sent";
+            // Update the status of the ticket to indicate a reply has been sent
             $db->conn->query("UPDATE tickets  SET status=1 WHERE id=$ticket_id");
         }else{
             $error="Can not send reply";
@@ -57,11 +62,13 @@
                 </div>
                 <div class="card-body">
                     <?php 
+                        // Display error message if an error occurred
                         if(isset($error) && $error != false){
                             echo '<div class="alert alert-danger">'.$error.'</div>';
                         }
                     ?>
                         <?php 
+                        // Display success message if the reply was sent successfully
                         if(isset($success) && $success != false){
                             echo '<div class="alert alert-success">'.$success.'</div>';
                         }

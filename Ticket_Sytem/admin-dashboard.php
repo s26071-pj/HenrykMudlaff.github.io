@@ -11,20 +11,26 @@
 </head>
 <?php 
 require_once('./support/int.php');
+
+// Check if the admin is logged in, otherwise redirect to the admin login page
 if(!isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] != true){
     header('Location: ./admin-login.php');
 }
 
+// Define different status values for the tickets
 $new_status=0;
 $waiting_reply_status=1;
 $closed_status=2;
 
+// Initialize counters for ticket statuses
 $new_count=0;
 $reply_count=0;
 $closed_count=0;
 
+// Connect to the database
 $db=new DB();
 
+// Count the number of tickets with status = $new_status
 $new_tickets_query="SELECT COUNT(*) AS new_tickets FROM tickets WHERE status=$new_status";
 $ntr=$db->conn->query($new_tickets_query); 
 if($ntr->num_rows > 0){
@@ -33,6 +39,7 @@ if($ntr->num_rows > 0){
     }
 }
 
+// Count the number of tickets with status = $waiting_reply_status
 $reply_tickets_query="SELECT COUNT(*) AS new_tickets FROM tickets WHERE status=$waiting_reply_status";
 $rtc=$db->conn->query($reply_tickets_query);
 if($rtc->num_rows > 0){
@@ -41,6 +48,7 @@ if($rtc->num_rows > 0){
     }
 }
 
+// Count the number of tickets with status = $closed_status
 $closed_tickets_query="SELECT COUNT(*) AS new_tickets FROM tickets WHERE status=$closed_status";
 $ctr=$db->conn->query($closed_tickets_query);
 if($ctr->num_rows > 0){
@@ -48,6 +56,8 @@ if($ctr->num_rows > 0){
         $closed_count=$row['new_tickets'];
     }
 }
+
+// Retrieve the latest tickets
 $latest=[];
 $recodes=$db->conn->query("SELECT * FROM tickets ORDER BY 'date' DESC LIMIT 10 ");
 if($recodes->num_rows >0){

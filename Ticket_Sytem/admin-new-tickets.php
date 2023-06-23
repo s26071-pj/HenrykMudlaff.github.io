@@ -1,3 +1,4 @@
+<!-- HTML Document -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,8 @@
 </head>
 <?php 
 require_once('./support/int.php');
+
+// Check if the admin is not logged in, if not, redirect to the admin login page
 if(!isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] != true){
     header('Location: ./admin-login.php');
 }
@@ -26,9 +29,11 @@ $db=new DB();
 
 $latest=[];
 $recodes=$db->conn->query("SELECT * FROM tickets WHERE status=0 ORDER BY 'date' DESC ");
-if($recodes->num_rows >0){
+
+// Fetch the latest new tickets from the database
+if($recodes->num_rows > 0){
     while ($row = $recodes->fetch_assoc()) {
-        $latest[]=$row;
+        $latest[] = $row;
     }
 }
 
@@ -39,6 +44,7 @@ if($recodes->num_rows >0){
         <div class="col-12 col-md-12">
             
             <div class="card mb-3">
+                <!-- Navigation links -->
                 <div class="list-inline admn_ul">
                     <a href="./admin-dashboard.php" class="list-inline-item">Dashboard</a>
                     <a href="./admin-new-tickets.php" class="list-inline-item">New Tickets</a>
@@ -51,7 +57,8 @@ if($recodes->num_rows >0){
                     New Tickets
                 </div>
                 <div class="card-body">
-                    <?php if(count($latest) > 0){?>
+                    <?php if(count($latest) > 0){ ?>
+                    <!-- Display the table of new tickets -->
                     <table class="table table-striped table-inverse">
                         <thead class="thead-inverse">
                             <tr>
@@ -62,25 +69,27 @@ if($recodes->num_rows >0){
                                 <th>Date</th>
                                 <th>Actions</th>
                             </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                foreach ($latest as $k => $v) {
-                                    echo '
-                                    <tr>
-                                        <td>'.$v['id'].'</td>
-                                        <td>'.$v['name'].'</td>
-                                        <td>'.$v['email'].'</td>
-                                        <td>'.$v['subject'].'</td>
-                                        <td>'.$v['date'].'</td>
-                                        <td><a href="./admin-ticket-view.php?id='.$v['id'].'" class="btn btn-sm btn-info">View<a/></td>
-                                    </tr>
-                                    ';
-                                }
-                                ?>
-                            </tbody>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            foreach ($latest as $k => $v) {
+                                // Display each new ticket as a table row
+                                echo '
+                                <tr>
+                                    <td>'.$v['id'].'</td>
+                                    <td>'.$v['name'].'</td>
+                                    <td>'.$v['email'].'</td>
+                                    <td>'.$v['subject'].'</td>
+                                    <td>'.$v['date'].'</td>
+                                    <td><a href="./admin-ticket-view.php?id='.$v['id'].'" class="btn btn-sm btn-info">View</a></td>
+                                </tr>
+                                ';
+                            }
+                            ?>
+                        </tbody>
                     </table>
-                    <?php }else{
+                    <?php } else {
+                        // If there are no new tickets, display a message
                         echo '<div class="alert alert-info">No any new tickets</div>';
                     } ?>
                 </div>

@@ -1,3 +1,4 @@
+<!-- HTML Document -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@
 $success=false;
 $error=false;
 require_once('./support/int.php');
+// Check if the form is submitted
 if(isset($_POST['submit'])){
     $name=$_POST['name'];
     $email=$_POST['email'];
@@ -31,7 +33,7 @@ if(isset($_POST['submit'])){
         $success='Your ticket has been created. Your ticket id is '.$unid;
         $to = $email;
         $subject = "Support Ticket";
-        $txt = "Dear $name your tickets has been sent to our support team and we will back you shortly. and here your ticket id $unid ";
+        $txt = "Dear $name, your ticket has been sent to our support team and we will get back to you shortly. Here is your ticket id: $unid";
         $headers = "From: iwantm8@gmail.com" . "\r\n";
         // mail($to,$subject,$txt,$headers);
     }else{
@@ -45,14 +47,16 @@ if(isset($_POST['submit'])){
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header"> Contact Our Support Center</div>
+                    <div class="card-header">Contact Our Support Center</div>
                     <div class="card-body">
                         <?php
+                        // Display error message if an error occurred
                         if(isset($error) && $error != false){
                             echo '<div class="alert alert-danger">'.$error.'</div>';
                         }
                         ?>
                         <?php
+                        // Display success message if the ticket was successfully created
                         if(isset($success) && $success != false){
                             echo '<div class="alert alert-success">'.$success.'</div>';
                         }
@@ -60,7 +64,7 @@ if(isset($_POST['submit'])){
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label>Your name <span class="text-danger">*</span> </label>
+                                    <label>Your name <span class="text-danger">*</span></label>
                                     <input type="text" required name="name" id="name" placeholder="Your full name" class="form-control">
                                 </div>
                             </div>
@@ -78,7 +82,7 @@ if(isset($_POST['submit'])){
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label>You Mobile Number <span class="text-danger">*</span></label>
+                                    <label>Your Mobile Number <span class="text-danger">*</span></label>
                                     <input type="text" required name="mobile" id="mobile" placeholder="Your Mobile Number" class="form-control">
                                 </div>
                             </div>

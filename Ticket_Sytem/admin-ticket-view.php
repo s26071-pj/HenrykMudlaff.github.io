@@ -1,3 +1,4 @@
+<!-- HTML Document -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +15,20 @@
     if(!isset($_GET['id'])){
         header('Location: ./admin-dashboard');
     }
+
+    // Include necessary files
     require_once('./support/int.php');
+
+    // Check if the admin is not logged in, if not, redirect to the admin login page
     if(!isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] != true){
         header('Location: ./admin-login.php');
     }
+
     $db=new DB();
     $ticket='';
     $this_ticket_query=$db->conn->query("SELECT * FROM tickets WHERE id=".$_GET['id']);
+
+    // Fetch the selected ticket from the database
     if($this_ticket_query->num_rows > 0){
         while ($row = $this_ticket_query->fetch_assoc()) {
             $ticket=$row;
@@ -30,6 +38,8 @@
     }
     $ticket_id=$ticket['id'];
     $reps=[];
+
+    // Fetch the replies for the selected ticket
     if($ticket != ''){
         $replies=$db->conn->query("SELECT * FROM ticket_reply WHERE ticket_id =$ticket_id");
         if($replies->num_rows > 0){
@@ -38,7 +48,8 @@
             }
         }
     }
-    //Reply Send Method
+
+    // Reply Send Method
     if(isset($_POST['submit'])){
         $message=$_POST['message'];
         
@@ -61,6 +72,7 @@
         <div class="col-12 col-md-12">
             <div class="card mb-3">
                 <div class="card-body">
+                    <!-- Navigation links -->
                     <div class="list-inline admn_ul">
                         <a href="./admin-dashboard.php" class="list-inline-item">Dashboard</a>
                         <a href="./admin-new-tickets.php" class="list-inline-item">New Tickets</a>
@@ -71,7 +83,6 @@
             <div class="card mb-3">
                 <div class="card-header">
                     Ticket ID : <?php  echo $ticket['ticket_id'] ;?>
-                    
                 </div>
                 <div class="card-body">
                     <?php 
@@ -79,7 +90,7 @@
                             echo '<div class="alert alert-danger">'.$error.'</div>';
                         }
                     ?>
-                        <?php 
+                    <?php 
                         if(isset($success) && $success != false){
                             echo '<div class="alert alert-success">'.$success.'</div>';
                         }

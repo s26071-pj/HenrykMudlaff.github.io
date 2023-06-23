@@ -16,12 +16,13 @@ require_once('./support/int.php');
 
 if (isset($_POST['id'])) {
     $db = new DB();
+    // Retrieve the ticket details from the database based on the ticket_id
     $ticket_q = $db->conn->query("SELECT * FROM tickets WHERE ticket_id='" . $_POST['id'] . "'");
     if ($ticket_q->num_rows > 0) {
         while ($row = $ticket_q->fetch_assoc()) {
+            // Redirect to the ticket.php page with the corresponding ticket's id
             header("Location: ./ticket.php?id=" . $row['id']);
         }
-        //f,s9cXM,FWgL
     } else {
         $error = "Invalid ticket id";
     }
@@ -37,11 +38,13 @@ if (isset($_POST['id'])) {
                     <div class="card-header"> View Your Ticket</div>
                     <div class="card-body">
                         <?php
+                        // Display error message if an error occurred
                         if (isset($error) && $error != false) {
                             echo '<div class="alert alert-danger">' . $error . '</div>';
                         }
                         ?>
                         <?php
+                        // Display success message if the ticket was successfully retrieved
                         if (isset($success) && $success != false) {
                             echo '<div class="alert alert-success">' . $success . '</div>';
                         }
@@ -52,6 +55,7 @@ if (isset($_POST['id'])) {
                                    list="ticketIdSuggestions">
                             <datalist id="ticketIdSuggestions">
                                 <?php
+                                // Generate the options for ticket_id suggestions based on the data from the database
                                 $ticketIds = getTicketIdsFromDatabase();
                                 foreach ($ticketIds as $ticketId) {
                                     echo '<option value="' . $ticketId . '">';
@@ -83,6 +87,7 @@ function getTicketIdsFromDatabase()
     $table = 'tickets';
     $column = 'ticket_id';
 
+    // Establish a connection to the database
     $conn = new mysqli($host, $user, $password, $database);
 
     if ($conn->connect_error) {
@@ -96,6 +101,7 @@ function getTicketIdsFromDatabase()
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+            // Retrieve ticket_id values and store them in an array
             $ticketIds[] = $row[$column];
         }
     }

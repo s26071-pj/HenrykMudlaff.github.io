@@ -10,10 +10,15 @@
 </head>
 <?php 
 require_once('./support/int.php');
+
+// Check if the admin is already logged in, if yes, redirect to the admin dashboard
 if(isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] == true){
    header('Location: ./admin-dashboard.php');
 }
+
 $erro=false;
+
+// Handle form submission
 if(isset($_POST['username'])){
    
     $password=$_POST['password'];
@@ -22,8 +27,10 @@ if(isset($_POST['username'])){
     $db=new DB();
     $query="SELECT * FROM admin WHERE username='$username'";
     $result=$db->conn->query($query);print_r($query);
+    
     if($result->num_rows > 0){
         while ($row = $result->fetch_assoc()) {
+            // Check if the entered password matches the stored password
             if($row['password'] == md5($password)){
                 $_SESSION['admin_logged'] =true;
                 $_SESSION['admin']=$row;
@@ -46,6 +53,7 @@ if(isset($_POST['username'])){
                 <div class="card-body">
                     <form method="POST">
                         <?php 
+                            // Display error message if there is an error
                             if(isset($erro) && $erro != false){
                                 echo '<div class="alert alert-danger">'.$erro.'</div>';
                             }
