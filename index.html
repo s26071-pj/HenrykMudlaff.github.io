@@ -6,7 +6,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	<style>
+
+		::-webkit-scrollbar {
+			width: 10px;
+		}
+
+		::-webkit-scrollbar-track {
+			background-color: #f1f1f1;
+			border-radius: 5px;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: #999;
+			border-radius: 5px;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background-color: #777;
+		}
+	</style>
+
 </head>
+
 <body class="is-preload">
 
 <!-- Wrapper -->
@@ -47,7 +70,6 @@
 			<p>
 				I graduated from Technical school in the field of information technology in Wejherowo and got the title of IT technician.
 			</p>
-			<hr>
 			<p>
 				In the past, I have trained in various sports, including Karate Shotokan, basketball, and swimming.
 				In Karate, I participated in numerous competitions and achieved several medal placements.
@@ -62,29 +84,74 @@
 
 			</p>
 			<hr>
+			<h2 class="major">Projects</h2>
+			<p>At the university, I currently learn advanced Java, Maven, Postman, and working with Spring Boot.</p>
+
 			<p>
-			<ul class="icons">
-				<li><a href="https://github.com/s26071-pj/MovieService" target="_blank" class="icon brands fa-github"><span class="label"></span></a></li>
-			</ul>
-			At the university, I currently learn advanced Java, Maven, Postman, and working with Spring Boot.
-			The button above is linked to one of the repositories with a project where I am working on microservice project.
-			The repository for the microservice is named 'Rental Service'.
+				<h3>Movie Service and Rental Service</h3>
+			<br>
+			This project is presenting the logic of the work of a movie rental shop.<br><br>
+			In Movie Service is created whole logic of renting the movie and all information about movies are saved in database.<br><br>
+			In Rental Service contains logic of checking the status of rented movies and if it is possible to rent a movie again.<br><br>
+
+			The button "Source code" is linked to the repository with a project where I am working on microservice project.
+			Main repository is named "Movie Service" and microservice repository is named "Rental Service".
 			(<strong><a href="https://github.com/s26071-pj/RentalService" target="_blank">Here is the link to the mentioned microservice</a></strong>).
-			In this project, I have learnt about creating and using beans and dependency injection. The university database was used in the Movie Service.
+			<br><br>
+			The university database was used in the Movie Service. <br><br>
+			In this project, I have learnt about creating and using beans, how to connect main project with microservice and dependency injection.<br>
 			Additionally, in this project, I learned how to prepare API documentation using Swagger UI and how to customize it.
-			</p>
 
+			<br><br>
+			<h4>Technologies used:</h4>
 
+			<div class="technologies">
+				<ul>
+					<li>Java - 17</li>
+					<li>&nbsp;&nbsp;Maven</li>
+					<li>&nbsp;&nbsp;Spring Boot</li>
+					<li>&nbsp;&nbsp;MongoDB</li>
+					<li>&nbsp;&nbsp;Swagger UI</li>
+				</ul>
+			</div>
+<br>
+			<div class="sourcecode">
+				<a href="https://github.com/s26071-pj/MovieService" target="_blank"><span class="label">Source code</span></a>
+			</div>
 
-			<hr>
+			<div style="display: flex; justify-content: center;">
+				<hr style="width: 50%;">
+			</div>
 			<p>
-			<ul class="icons">
-				<li><a href="https://github.com/s26071-pj/s26071bank" target="_blank" class="icon brands fa-github"><span class="label"></span></a></li>
-			</ul>
-				The next repository contains a project that represents the Bank Service.
+
+				<h3>Bank Service</h3>
+			<br>
+				This project represents simple bank system that displays bank transactions such as payments and withdrawals for a given user.<br><br>
+				During account registration its required to provide the initial account balance.<br>
+				Deposit and withdraw logic works on provided account balance.
+				To read data from specific account only ID account is required. <br><br>
+				Status of the transaction have two options: Accepted or declined.
+				Created users and all information are saved in mocked database.<br>
+
 				Here, I have learnt how to create unit tests and how to test applications using Swagger UI.
-				This is a simple system that displays bank transactions such as payments and withdrawals for a given user.
-			</p>
+
+				<br><br>
+			<div class="sourcecode">
+				<a href="https://github.com/s26071-pj/s26071bank" target="_blank"><span class="label">Source code</span></a>
+			</div>
+
+			<br><br>
+			<h4>Technologies used:</h4>
+
+			<div class="technologies">
+				<ul>
+					<li>Java - 17</li>
+					<li>&nbsp;&nbsp;Gradle</li>
+					<li>&nbsp;&nbsp;Spring Boot</li>
+					<li>&nbsp;&nbsp;Swagger UI</li>
+				</ul>
+			</div>
+
 			<hr>
 			<p>
 				These are not all the projects I have worked on or currently working on, but they are some of the most significant ones.
@@ -101,22 +168,38 @@
 			<p>
 				<a href="https://www.info-marine.com/home" target="_blank"> <img src="./images/info_marine.png" alt="Info Marine Logo" style="width:215px;height:150px"> </a>
 				<br>
-				Currently, I am working in a company named 'Info Marine sp. z o.o.' as part of the Analysis Department.
-				More specifically, I hold the position of a Junior. My responsibilities involve the initial processing of machine vibration measurement data and uploading it to database.
-				I also create data sheets and conduct an initial review of the measurements, comparing them with previous records to ensure the machine hours are within good condition.
-				Once I complete my tasks, I send a thank-you email to the ship's crew, addressing any concerns or seeking clarifications on the information provided by the crew.
+				My last place of employment was company named 'Info Marine sp. z o.o.' and I was part of the Analysis Department.<br><br>
+				More specifically, I hold the position of a Junior. <br><br>
+				My responsibilities involve:
+				<ul>
+					<li>the initial processing of machine vibration measurement data and uploading it to database</li>
+					<li>create data sheets and conduct an initial review of the measurements</li>
+					<li>comparing them with previous records to ensure the machine hours are within good condition</li>
+				</ul>
+
+				Once I complete my tasks, I sent a thank-you email to the ship's crew, addressing any concerns or
+				seeking clarifications on the information provided by the crew earlier.
 			</p>
 			<p>
 				Thanks to this job, I have learnt analytical thinking and technical approach to talking to a client.
 			</p>
-			<hr>
+
+			<div style="display: flex; justify-content: center;">
+				<hr style="width: 50%;">
+			</div>
+
 			<p>
-				My previous employment was as an intern in the Department of IT and Communication at the Penitentiary in Wronki.
-				The majority of my tasks involved working with Cisco equipment, where I was responsible for network maintenance,
-				installation, equipment status checks, and implementing new technologies such as RJ45 CAT 6 sockets, switches, and VOIP telephone networks.
+				I was previously employed as an intern in the Department of IT and Communication at the Penitentiary in Wronki.<br><br>
+				The majority of my tasks involved:
+			<ul>
+			<li>working with Cisco equipment, where I was responsible for network maintenance</li>
+			<li>installation, equipment status checks, and implementing new technologies such as RJ45 CAT 6 sockets, switches, and VOIP telephone networks</li>
+			</ul>
+
 			</p>
-			<p>Thanks to this job, I have learnt what a proper service of network devices should look like, as well as how to develop an existing network and program Cisco and VOIP equipment.
-				Due to working in a unique environment like prison, I acquired the ability to work under pressure and step out of my comfort zone.
+			<p>Thanks to this job, I have learnt what a proper service of network devices should look like, as well as
+				how to develop an existing network and program Cisco and VOIP equipment.<br>
+				Due to working in a unique environment like penitentiary, I acquired the ability to work under pressure and step out of my comfort zone.
 			</p>
 		</article>
 
